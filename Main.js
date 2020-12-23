@@ -1,4 +1,4 @@
-const URl = "https://www.rprxy.xyz/places/api-get-details?assetId=5940836435"
+const URL = "https://www.rprxy.xyz/places/api-get-details?assetId=5940836435"
 const Req = new Request(URL)
 const LoadJSONURL = await Req.loadJSON()
 
