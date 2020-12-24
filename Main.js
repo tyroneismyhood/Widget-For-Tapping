@@ -4,7 +4,7 @@ const Req = new Request(URL)
 const LoadJSONURL = await Req.loadJSON()
 
 if (config.runsInWidget) {
-    let Widget = await CreateWidget("Tapping Realms Stats!", `${LoadJSONURL.OnlineCount} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`, "#0000000", "https://t4.rbxcdn.com/3a26edcfbc0cd732fa5bbd85adc6b04d")
+    let Widget = await CreateWidget("Tapping Realms Stats!", `${LoadJSONURL.OnlineCount} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`, "#0000000")
     
     Script.setWidget(Widget)
     Script.complete()
@@ -47,7 +47,7 @@ async function loadImage(imageURL) {
 }
 
 
-function CreateWidget(title, playing, likes, favorites, color, image) {
+function CreateWidget(title, playing, likes, favorites, color) {
     let Widget = new ListWidget()
 
     Widget.backgroundColor = new Color(color)
