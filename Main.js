@@ -3,7 +3,7 @@ const Req = new Request(URL)
 const LoadJSONURL = await Req.loadJSON()
 
 if (config.runsInWidget) {
-    let Widget = await CreateWidget("Tapping Realms Stats!", `${LoadJSONURL.OnlineCount} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`, "#0000000")
+    let Widget = await CreateWidget("Tapping Realms Stats!", `${LoadJSONURL.OnlineCount} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`)
     
     Script.setWidget(Widget)
     Script.complete()
@@ -34,10 +34,10 @@ function CreateRow(title, number) {
     return Row
 }
 
-function CreateWidget(title, playing, likes, favorites, color) {
+function CreateWidget(title, playing, likes, favorites) {
     let Widget = new ListWidget()
 
-    Widget.backgroundColor = new Color(color)
+    // Widget.backgroundColor = new Color(color)
 
     let TitleText = Widget.addText(title)
 
@@ -70,6 +70,15 @@ function CreateWidget(title, playing, likes, favorites, color) {
     FavoritedText = Font.systemFont(16)
 
     Widget.addSpacer(5)
+
+    let StartColor = new Color("#000428")
+    let EndColor = new Color("#004e92")
+    let Gradient = new LinearGradient()
+
+    Gradient.colors = [StartColor, EndColor]
+    Gradient.locations = [0.0, 1]
+
+    Widget.backgroundGradient = Gradient
 
     return Widget
 }
