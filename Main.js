@@ -35,6 +35,18 @@ function CreateRow(title, number) {
     return Row
 }
 
+function loadImage(imageURL) {
+    let RequestToImage = new Request(imageURL)
+    let ImageToFind = await RequestToImage.loadImage()
+
+    if (ImageToFind != null) {
+        return ImageToFind
+    } else {
+        console.log("Well Fuck Something Happened And It Ain't Fuckin Good Cuz!")
+    }
+}
+
+
 function CreateWidget(title, playing, likes, favorites, color, image) {
     let Widget = new ListWidget()
 
@@ -77,17 +89,6 @@ function CreateWidget(title, playing, likes, favorites, color, image) {
     Widget.backgroundImage = ImageToLoad
 
     return Widget
-}
-
-async function loadImage(imageURL) {
-    let RequestToImage = new Request(imageURL)
-    let ImageToFind = await RequestToImage.loadImage()
-
-    if (ImageToFind != null) {
-        return ImageToFind
-    } else {
-        console.log("Well Fuck Something Happened And It Ain't Fuckin Good Cuz!")
-    }
 }
 
 // OnlineCount, TotalUpVotes, FavoritedCount
