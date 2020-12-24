@@ -3,7 +3,7 @@ const Req = new Request(URL)
 const LoadJSONURL = await Req.loadJSON()
 
 if (config.runsInWidget) {
-    let Widget = await CreateWidget("Tapping Realms Stats!", `${LoadJSONURL.OnlineCount} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`, "#0000000")
+    let Widget = await CreateWidget("Tapping Realms Stats!", `${LoadJSONURL.OnlineCount} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`, "#0000000", "https://t4.rbxcdn.com/3a26edcfbc0cd732fa5bbd85adc6b04d")
     
     Script.setWidget(Widget)
     Script.complete()
@@ -34,7 +34,7 @@ function CreateRow(title, number) {
     return Row
 }
 
-function CreateWidget(title, playing, likes, favorites, color) {
+function CreateWidget(title, playing, likes, favorites, color, image) {
     let Widget = new ListWidget()
 
     Widget.backgroundColor = new Color(color)
@@ -70,6 +70,13 @@ function CreateWidget(title, playing, likes, favorites, color) {
     FavoritedText = Font.systemFont(16)
 
     Widget.addSpacer(5)
+
+    Widget.centerAlignContent()
+
+    let Image = Widget.addImage(image)
+
+    Image.centerAlignImage()
+    Image.imageSize = new Size(300, 1400)
 
     return Widget
 }
