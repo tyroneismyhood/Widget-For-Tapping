@@ -3,17 +3,17 @@ const Req = new Request(URL)
 const LoadJSONURL = await Req.loadJSON()
 
 if (config.runsInWidget) {
-    let Widget = CreateWidget("Tapping Realms Stats!", "#53d769")
+    let Widget = await CreateWidget("Tapping Realms Stats!", `${LoadJSONURL.OnlineCount} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`, "#0000000")
     
     Script.setWidget(Widget)
     Script.complete()
 } else {
     let Table = new UITable()
-    // let Row = new UITableRow()
+    let Row = new UITableRow()
 
-    // Row.isHeader = true
-    // Row.addText(`Tapping Realms Stats!`)
-    // Table.addRow(Row)
+    Row.isHeader = true
+    Row.addText(`Tapping Realms Stats!`)
+    Table.addRow(Row)
 
     Table.addRow(CreateRow("Online Players", LoadJSONURL.OnlineCount))
     Table.addRow(CreateRow("Total Likes", LoadJSONURL.TotalUpVotes))
@@ -34,16 +34,40 @@ function CreateRow(title, number) {
     return Row
 }
 
-function CreateWidget(pretitle, color) {
+function CreateWidget(title, playing, likes, favorites, color) {
     let Widget = new ListWidget()
 
     Widget.backgroundColor = new Color(color)
 
-    let PreText = Widget.addText(pretitle)
+    let TitleText = Widget.addText(title)
 
-    PreText.textColor = Color.white()
-    PreText.textOpacity = 0.9
-    PreText = Font.systemFont(16)
+    TitleText.textColor = Color.white()
+    TitleText.textOpacity = 0.9
+    TitleText = Font.systemFont(16)
+
+    Widget.addSpacer(5)
+
+    let PlayingText = Widget.addText(playing)
+
+    PlayingText.textColor = Color.green()
+    PlayingText.textOpacity = 0.9
+    TitleText = Font.systemFont(16)
+
+    Widget.addSpacer(5)
+
+    let LikedText = Widget.addText(likes)
+
+    LikedText.textColor = Color.red()
+    LikedText.textOpacity = 0.9
+    LikedText = Font.systemFont(16)
+
+    Widget.addSpacer(5)
+
+    let FavoritedText = Widget.addText(favorites)
+
+    FavoritedText.textColor = Color.blue()
+    FavoritedText.textOpacity = 0.9
+    FavoritedText = Font.systemFont(16)
 
     Widget.addSpacer(5)
 
