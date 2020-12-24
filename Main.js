@@ -1,4 +1,5 @@
 const URL = "https://www.rprxy.xyz/places/api-get-details?assetId=5940836435"
+let ImageURL = "https://t4.rbxcdn.com/3a26edcfbc0cd732fa5bbd85adc6b04d"
 const Req = new Request(URL)
 const LoadJSONURL = await Req.loadJSON()
 
@@ -71,12 +72,22 @@ function CreateWidget(title, playing, likes, favorites, color, image) {
 
     Widget.addSpacer(5)
 
-    let Image = Widget.addImage(image)
+    let ImageToLoad = await loadImage(ImageURL)
 
-    Image.centerAlignImage()
-    Image.imageSize = new Size(300, 1400)
+    Widget.backgroundImage = ImageToLoad
 
     return Widget
+}
+
+async function loadImage(imageURL) {
+    let RequestToImage = new Request(imageURL)
+    let ImageToFind = await RequestToImage.loadImage()
+
+    if (ImageToFind != null) {
+        return ImageToFind
+    } else {
+        console.log("Well Fuck Something Happened And It Ain't Fuckin Good Cuz!")
+    }
 }
 
 // OnlineCount, TotalUpVotes, FavoritedCount
