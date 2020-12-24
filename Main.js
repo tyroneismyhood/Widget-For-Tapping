@@ -1,5 +1,4 @@
 const URL = "https://www.rprxy.xyz/places/api-get-details?assetId=5940836435"
-let ImageURL = "https://t4.rbxcdn.com/3a26edcfbc0cd732fa5bbd85adc6b04d"
 const Req = new Request(URL)
 const LoadJSONURL = await Req.loadJSON()
 
@@ -21,7 +20,7 @@ if (config.runsInWidget) {
     Table.addRow(CreateRow("Total Favorites", LoadJSONURL.FavoritedCount))
 
     if (config.runsWithSiri)
-        Speech.speak(`There Are ${LoadJSONURL.OnlineCount} Stupid Fucks Playing Your Game!`)
+        Speech.speak("Go fuck yourself you did this shit wrong you fucker!")
 
     Table.present()
 }
@@ -34,18 +33,6 @@ function CreateRow(title, number) {
 
     return Row
 }
-
-async function loadImage(imageURL) {
-    let RequestToImage = new Request(imageURL)
-    let ImageToFind = await RequestToImage.loadImage()
-
-    if (ImageToFind != null) {
-        return ImageToFind
-    } else {
-        console.log("Well Fuck Something Happened And It Ain't Fuckin Good Cuz!")
-    }
-}
-
 
 function CreateWidget(title, playing, likes, favorites, color) {
     let Widget = new ListWidget()
@@ -83,10 +70,6 @@ function CreateWidget(title, playing, likes, favorites, color) {
     FavoritedText = Font.systemFont(16)
 
     Widget.addSpacer(5)
-
-    let ImageToLoad = loadImage(ImageURL)
-
-    Widget.backgroundImage = ImageToLoad
 
     return Widget
 }
