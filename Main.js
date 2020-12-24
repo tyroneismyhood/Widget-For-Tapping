@@ -84,7 +84,7 @@ function CreateWidget(title, playing, likes, favorites, color, image) {
 
     Widget.addSpacer(5)
 
-    let ImageToLoad = await loadImage(ImageURL)
+    let ImageToLoad = loadImage(ImageURL)
 
     Widget.backgroundImage = ImageToLoad
 
