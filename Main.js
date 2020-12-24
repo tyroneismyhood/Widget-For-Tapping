@@ -37,11 +37,9 @@ function CreateRow(title, number) {
 function CreateWidget(title, playing, likes, favorites) {
     let Widget = new ListWidget()
 
-    // Widget.backgroundColor = new Color(color)
-
     let TitleText = Widget.addText(title)
 
-    TitleText.textColor = Color.white()
+    TitleText.textColor = new Color("#48db27")
     TitleText.textOpacity = 0.9
     TitleText = Font.systemFont(16)
 
@@ -49,7 +47,7 @@ function CreateWidget(title, playing, likes, favorites) {
 
     let PlayingText = Widget.addText(playing)
 
-    PlayingText.textColor = Color.green()
+    PlayingText.textColor = new Color("#278ddb")
     PlayingText.textOpacity = 0.9
     TitleText = Font.systemFont(16)
 
@@ -57,7 +55,7 @@ function CreateWidget(title, playing, likes, favorites) {
 
     let LikedText = Widget.addText(likes)
 
-    LikedText.textColor = Color.red()
+    LikedText.textColor = new Color("#db6c27")
     LikedText.textOpacity = 0.9
     LikedText = Font.systemFont(16)
 
@@ -82,5 +80,3 @@ function CreateWidget(title, playing, likes, favorites) {
 
     return Widget
 }
-
-// OnlineCount, TotalUpVotes, FavoritedCount
