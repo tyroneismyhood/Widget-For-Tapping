@@ -35,7 +35,7 @@ function CreateRow(title, number) {
     return Row
 }
 
-function loadImage(imageURL) {
+async function loadImage(imageURL) {
     let RequestToImage = new Request(imageURL)
     let ImageToFind = await RequestToImage.loadImage()
 
