@@ -71,8 +71,6 @@ function CreateWidget(title, playing, likes, favorites, color, image) {
 
     Widget.addSpacer(5)
 
-    Widget.centerAlignContent()
-
     let Image = Widget.addImage(image)
 
     Image.centerAlignImage()
