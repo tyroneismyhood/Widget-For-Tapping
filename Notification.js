@@ -1,7 +1,12 @@
-let Alert = new Alert()
+let notif
 
-Alert.title = "HOLY IT'S NIGGER TIME"
-Alert.message = "NIGGER NIGGER NIGGER ALL HAIL GEORGE FLOYD!"
-Alert.addAction("WTF IT'S NIGGER TIME?")
+async function createNotification() {
+    notif = new Notification()
+    notif.title = "Test"
+    notif.body = "Test2"
+    notif.openURL = "https://github.com/YTDylan2/Widget-For-Tapping/tree-save/main/Notification.js"
+    notif.scriptName = Script.name()
+    notif.threadIdentifier = Script.name()    
+}
 
-await Alert.presentAlert()
+await createNotification()
