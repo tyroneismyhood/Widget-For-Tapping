@@ -2,6 +2,33 @@ const URL = "https://www.rprxy.xyz/places/api-get-details?assetId=5940836435"
 const Req = new Request(URL)
 const LoadJSONURL = await Req.loadJSON()
 
+function AbbreviateNumber(Value) {
+    var NewValue = Value
+
+    if (Value >= 1000) {
+        var Suffixes = ["", "K", "M", "B", "T"]
+        var SuffixNumber = Math.floor( ("" + Value).length / 3)
+        var ShortValue = ""
+
+        for (var Precision = 2; Precision >= 1; Precision--) {
+            ShortValue = parseFloat( (SuffixNumber != 0 ? (Value / Math.pow(1000, SuffixNumber) ) : Value).toPrecision(Precision))
+
+            var LessShortValue = (ShortValue + "").replace(/[^a-zA-Z 0-9]+/g, "")
+
+            if (LessShortValue.length <= 2) {
+                break
+            }
+
+            if (ShortValue % 1 != 0)
+
+            ShortValue = ShortValue.toFixed(1)
+            NewValue = ShortValue + Suffixes[SuffixNumber]
+        }
+
+        return NewValue
+    }
+}
+
 if (config.runsInWidget) {
     let Widget = await CreateWidget("Tapping Realms Stats!", `${LoadJSONURL.OnlineCount} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`, `${LoadJSONURL.VisitedCount} Total Visits!`)
     
@@ -15,10 +42,10 @@ if (config.runsInWidget) {
     Row.addText(`Tapping Realms Stats!`)
     Table.addRow(Row)
 
-    Table.addRow(CreateRow("Online Players", LoadJSONURL.OnlineCount))
-    Table.addRow(CreateRow("Total Likes", LoadJSONURL.TotalUpVotes))
-    Table.addRow(CreateRow("Total Favorites", LoadJSONURL.FavoritedCount))
-    Table.addRow(CreateRow("Total Visits", LoadJSONURL.VisitedCount))
+    Table.addRow(CreateRow("Online Players", AbbreviateNumber(LoadJSONURL.OnlineCount)))
+    Table.addRow(CreateRow("Total Likes", AbbreviateNumber(LoadJSONURL.TotalUpVotes)))
+    Table.addRow(CreateRow("Total Favorites", AbbreviateNumber(LoadJSONURL.FavoritedCount)))
+    Table.addRow(CreateRow("Total Visits", AbbreviateNumber(LoadJSONURL.VisitedCount)))
 
     if (config.runsWithSiri)
         Speech.speak("Go fuck yourself you did this shit wrong you fucker!")
