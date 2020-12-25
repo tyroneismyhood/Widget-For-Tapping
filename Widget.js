@@ -42,10 +42,10 @@ if (config.runsInWidget) {
     Row.addText(`Tapping Realms Stats!`)
     Table.addRow(Row)
 
-    Table.addRow(CreateRow("Online Players", AbbreviateNumber(LoadJSONURL.OnlineCount)))
-    Table.addRow(CreateRow("Total Likes", AbbreviateNumber(LoadJSONURL.TotalUpVotes)))
-    Table.addRow(CreateRow("Total Favorites", AbbreviateNumber(LoadJSONURL.FavoritedCount)))
-    Table.addRow(CreateRow("Total Visits", AbbreviateNumber(LoadJSONURL.VisitedCount)))
+    Table.addRow(CreateRow("Online Players", LoadJSONURL.OnlineCount))
+    Table.addRow(CreateRow("Total Likes", LoadJSONURL.TotalUpVotes))
+    Table.addRow(CreateRow("Total Favorites", LoadJSONURL.FavoritedCount))
+    Table.addRow(CreateRow("Total Visits", LoadJSONURL.VisitedCount))
 
     if (config.runsWithSiri)
         Speech.speak("Go fuck yourself you did this shit wrong you fucker!")
@@ -57,7 +57,7 @@ function CreateRow(title, number) {
     let Row = new UITableRow()
 
     Row.addText(title)
-    Row.addText(number.toString()).rightAligned()
+    Row.addText(AbbreviateNumber(number).rightAligned())
 
     return Row
 }
