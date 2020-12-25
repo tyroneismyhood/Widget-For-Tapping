@@ -30,7 +30,7 @@ function AbbreviateNumber(Value) {
 }
 
 if (config.runsInWidget) {
-    let Widget = await CreateWidget("Tapping Realms Stats!", `${LoadJSONURL.OnlineCount} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`, `${LoadJSONURL.VisitedCount} Total Visits!`)
+    let Widget = await CreateWidget("Tapping Realms Stats!", `${AbbreviateNumber(LoadJSONURL.OnlineCount)} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`, `${LoadJSONURL.VisitedCount} Total Visits!`)
     
     Script.setWidget(Widget)
     Script.complete()
@@ -57,7 +57,7 @@ function CreateRow(title, number) {
     let Row = new UITableRow()
 
     Row.addText(title)
-    Row.addText(AbbreviateNumber(number.toString()))
+    Row.addText(number.toString()).rightAligned()
 
     return Row
 }
