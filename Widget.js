@@ -4,32 +4,20 @@ const LoadJSONURL = await Req.loadJSON()
 
 let AbbreviatedOnlineCount = AbbreviateNumber(LoadJSONURL.TotalUpVotes)
 
-function AbbreviateNumber(Value) {
-    var NewValue = Value
-
-    if (Value >= 1000) {
-        var Suffixes = ["", "K", "M", "B", "T"]
-        var SuffixNumber = Math.floor( ("" + Value).length / 3)
-        var ShortValue = ""
-
-        for (var Precision = 2; Precision >= 1; Precision--) {
-            ShortValue = parseFloat( (SuffixNumber != 0 ? (Value / Math.pow(1000, SuffixNumber) ) : Value).toPrecision(Precision))
-
-            var LessShortValue = (ShortValue + "").replace(/[^a-zA-Z 0-9]+/g, "")
-
-            if (LessShortValue.length <= 2) {
-                break
-            }
-
-            if (ShortValue % 1 != 0)
-
-            ShortValue = ShortValue.toFixed(1)
-            NewValue = ShortValue + Suffixes[SuffixNumber]
-        }
-
-        return NewValue
+function AbbreviateNumber(value) {
+    let newValue = value;
+    const suffixes = ["", "K", "M", "B","T"];
+    let suffixNum = 0;
+    while (newValue >= 1000) {
+      newValue /= 1000;
+      suffixNum++;
     }
-}
+  
+    newValue = newValue.toPrecision(3);
+  
+    newValue += suffixes[suffixNum];
+    return newValue;
+  }
 
 if (config.runsInWidget) {
     let Widget = await CreateWidget("Tapping Realms Stats!", `${AbbreviatedOnlineCount} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`, `${LoadJSONURL.VisitedCount} Total Visits!`)
