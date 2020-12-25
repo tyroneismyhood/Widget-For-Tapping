@@ -2,7 +2,7 @@ const URL = "https://www.rprxy.xyz/places/api-get-details?assetId=5940836435"
 const Req = new Request(URL)
 const LoadJSONURL = await Req.loadJSON()
 
-let AbbreviatedOnlineCount = AbbreviateNumber(LoadJSONURL.OnlineCount)
+let AbbreviatedOnlineCount = AbbreviateNumber(LoadJSONURL.TotalUpVotes)
 
 function AbbreviateNumber(Value) {
     var NewValue = Value
