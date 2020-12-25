@@ -2,6 +2,8 @@ const URL = "https://www.rprxy.xyz/places/api-get-details?assetId=5940836435"
 const Req = new Request(URL)
 const LoadJSONURL = await Req.loadJSON()
 
+let AbbreviatedOnlineCount = AbbreviateNumber(LoadJSONURL.OnlineCount)
+
 function AbbreviateNumber(Value) {
     var NewValue = Value
 
@@ -30,7 +32,7 @@ function AbbreviateNumber(Value) {
 }
 
 if (config.runsInWidget) {
-    let Widget = await CreateWidget("Tapping Realms Stats!", `${AbbreviateNumber(LoadJSONURL.OnlineCount)} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`, `${LoadJSONURL.VisitedCount} Total Visits!`)
+    let Widget = await CreateWidget("Tapping Realms Stats!", `${AbbreviatedOnlineCount} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`, `${LoadJSONURL.VisitedCount} Total Visits!`)
     
     Script.setWidget(Widget)
     Script.complete()
