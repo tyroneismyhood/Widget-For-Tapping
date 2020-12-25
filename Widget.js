@@ -57,7 +57,7 @@ function CreateRow(title, number) {
     let Row = new UITableRow()
 
     Row.addText(title)
-    Row.addText(AbbreviateNumber(number).rightAligned())
+    Row.addText(AbbreviateNumber(number))
 
     return Row
 }
