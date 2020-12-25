@@ -3,7 +3,7 @@ const Req = new Request(URL)
 const LoadJSONURL = await Req.loadJSON()
 
 if (config.runsInWidget) {
-    let Widget = await CreateWidget("Tapping Realms Stats!", `${LoadJSONURL.OnlineCount} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`)
+    let Widget = await CreateWidget("Tapping Realms Stats!", `${LoadJSONURL.OnlineCount} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`, `${LoadJSONURL.VisitedCount} Total Visits!`)
     
     Script.setWidget(Widget)
     Script.complete()
@@ -18,6 +18,7 @@ if (config.runsInWidget) {
     Table.addRow(CreateRow("Online Players", LoadJSONURL.OnlineCount))
     Table.addRow(CreateRow("Total Likes", LoadJSONURL.TotalUpVotes))
     Table.addRow(CreateRow("Total Favorites", LoadJSONURL.FavoritedCount))
+    Table.addRow(CreateRow("Total Visits", LoadJSONURL.VisitedCount))
 
     if (config.runsWithSiri)
         Speech.speak("Go fuck yourself you did this shit wrong you fucker!")
@@ -34,7 +35,7 @@ function CreateRow(title, number) {
     return Row
 }
 
-function CreateWidget(title, playing, likes, favorites) {
+function CreateWidget(title, playing, likes, favorites, visits) {
     let Widget = new ListWidget()
 
     let TitleText = Widget.addText(title)
@@ -47,7 +48,7 @@ function CreateWidget(title, playing, likes, favorites) {
 
     let PlayingText = Widget.addText(playing)
 
-    PlayingText.textColor = new Color("#278ddb")
+    PlayingText.textColor = Color.blue()
     PlayingText.textOpacity = 0.9
     TitleText = Font.systemFont(16)
 
@@ -55,7 +56,7 @@ function CreateWidget(title, playing, likes, favorites) {
 
     let LikedText = Widget.addText(likes)
 
-    LikedText.textColor = new Color("#db6c27")
+    LikedText.textColor = Color.blue()
     LikedText.textOpacity = 0.9
     LikedText = Font.systemFont(16)
 
@@ -66,6 +67,14 @@ function CreateWidget(title, playing, likes, favorites) {
     FavoritedText.textColor = Color.blue()
     FavoritedText.textOpacity = 0.9
     FavoritedText = Font.systemFont(16)
+
+    Widget.addSpacer(5)
+    
+    let VisitedText = Widget.addText(visits)
+
+    VisitedText.textColor = Color.blue()
+    VisitedText.textOpacity = 0.9
+    VisitedText = Font.systemFont(16)
 
     Widget.addSpacer(5)
 
