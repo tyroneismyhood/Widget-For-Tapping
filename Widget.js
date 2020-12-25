@@ -2,25 +2,37 @@ const URL = "https://www.rprxy.xyz/places/api-get-details?assetId=5940836435"
 const Req = new Request(URL)
 const LoadJSONURL = await Req.loadJSON()
 
-let AbbreviatedOnlineCount = AbbreviateNumber(LoadJSONURL.TotalUpVotes)
+let AbbreviatedOnlineCount = AbbreviateNumber(LoadJSONURL.OnlineCount)
+let AbbreviatedTotalUpVoteCount = AbbreviateNumber(LoadJSONURL.TotalUpVotes)
+let AbbreviatedTotalFavorites = AbbreviateNumber(LoadJSONURL.FavoritedCount)
+let AbbrevatedTotalVisits = AbbreviateNumber(LoadJSONURL.VisitedCount)
 
-function AbbreviateNumber(value) {
-    let newValue = value;
-    const suffixes = ["", "K", "M", "B","T"];
-    let suffixNum = 0;
-    while (newValue >= 1000) {
-      newValue /= 1000;
-      suffixNum++;
+function AbbreviateNumber(Value) {
+    let NewValue = Value;
+
+    const Suffixes = [
+        "", 
+        "K", 
+        "M", 
+        "B",
+        "T"
+    ];
+
+    let SuffixNumber = 0;
+
+    while (NewValue >= 1000) {
+        NewValue /= 1000;
+        SuffixNumber++;
     }
   
-    newValue = newValue.toPrecision(3);
-  
-    newValue += suffixes[suffixNum];
-    return newValue;
+    NewValue = NewValue.toPrecision(3);
+    NewValue += Suffixes[SuffixNumber];
+
+    return NewValue;
   }
 
 if (config.runsInWidget) {
-    let Widget = await CreateWidget("Tapping Realms Stats!", `${AbbreviatedOnlineCount} Playing!`, `${LoadJSONURL.TotalUpVotes} Total Likes!`, `${LoadJSONURL.FavoritedCount} Total Favorites!`, `${LoadJSONURL.VisitedCount} Total Visits!`)
+    let Widget = await CreateWidget("Tapping Realms Stats!", `${AbbreviatedOnlineCount} Playing!`, `${AbbreviatedTotalUpVoteCount} Total Likes!`, `${AbbreviatedTotalFavorites} Total Favorites!`, `${AbbrevatedTotalVisits} Total Visits!`)
     
     Script.setWidget(Widget)
     Script.complete()
