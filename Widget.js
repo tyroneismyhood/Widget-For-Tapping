@@ -6,6 +6,7 @@ let AbbreviatedOnlineCount = AbbreviateNumber(LoadJSONURL.OnlineCount)
 let AbbreviatedTotalUpVoteCount = AbbreviateNumber(LoadJSONURL.TotalUpVotes)
 let AbbreviatedTotalFavorites = AbbreviateNumber(LoadJSONURL.FavoritedCount)
 let AbbrevatedTotalVisits = AbbreviateNumber(LoadJSONURL.VisitedCount)
+let GamesName = LoadJSONURL.Name
 
 function AbbreviateNumber(Value) {
     let NewValue = Value;
@@ -32,7 +33,7 @@ function AbbreviateNumber(Value) {
   }
 
 if (config.runsInWidget) {
-    let Widget = await CreateWidget("Tapping Realms Stats!", `${AbbreviatedOnlineCount} Playing!`, `${AbbreviatedTotalUpVoteCount} Total Likes!`, `${AbbreviatedTotalFavorites} Total Favorites!`, `${AbbrevatedTotalVisits} Total Visits!`)
+    let Widget = await CreateWidget(GamesName, `${AbbreviatedOnlineCount} Playing!`, `${AbbreviatedTotalUpVoteCount} Total Likes!`, `${AbbreviatedTotalFavorites} Total Favorites!`, `${AbbrevatedTotalVisits} Total Visits!`)
     
     Script.setWidget(Widget)
     Script.complete()
@@ -41,13 +42,13 @@ if (config.runsInWidget) {
     let Row = new UITableRow()
 
     Row.isHeader = true
-    Row.addText(`Tapping Realms Stats!`)
+    Row.addText(GamesName)
     Table.addRow(Row)
 
-    Table.addRow(CreateRow("Online Players", LoadJSONURL.OnlineCount))
-    Table.addRow(CreateRow("Total Likes", LoadJSONURL.TotalUpVotes))
-    Table.addRow(CreateRow("Total Favorites", LoadJSONURL.FavoritedCount))
-    Table.addRow(CreateRow("Total Visits", LoadJSONURL.VisitedCount))
+    Table.addRow(CreateRow("Online Players", AbbreviatedOnlineCount))
+    Table.addRow(CreateRow("Total Likes", AbbreviatedTotalUpVoteCount))
+    Table.addRow(CreateRow("Total Favorites", AbbreviatedTotalFavorites))
+    Table.addRow(CreateRow("Total Visits", AbbrevatedTotalVisits))
 
     if (config.runsWithSiri)
         Speech.speak("Go fuck yourself you did this shit wrong you fucker!")
