@@ -21,6 +21,10 @@ function AbbreviateNumber(Value) {
 
     let SuffixNumber = 0;
 
+    while (NewValue < 1000) {
+        return Value;
+    }
+
     while (NewValue >= 1000) {
         NewValue /= 1000;
         SuffixNumber++;
