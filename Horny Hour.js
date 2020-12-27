@@ -4,7 +4,7 @@ async function CreateNotification() {
     notif.body = "Time For Horse Porn!"
     notif.threadIdentifier = Script.name()
 
-    notif.setTriggerDate(1)
+    // notif.setTriggerDate(1)
     await notif.schedule()
 }
 
