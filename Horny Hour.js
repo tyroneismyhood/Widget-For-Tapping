@@ -1,5 +1,11 @@
-let notification = new Notification()
+async function CreateNotification() {
+    notif = new Notification()
+    notif.title = "Horny Hour!"
+    notif.body = "Time For Horse Porn!"
+    notif.threadIdentifier = Script.name()
 
-notification.title = "Horny Hour!"
-notification.body = "Horny Hour Mf!"
-notification.setDailyTrigger(21, 21, true)
+    Notification.setTriggerDate(1)
+    await Notification.schedule()
+}
+
+await CreateNotification()
