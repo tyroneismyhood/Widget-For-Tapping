@@ -74,7 +74,7 @@ function CreateRow(title, number) {
     return Row
 }
 
-function CreateWidget(title, playing, likes, favorites, visits) {
+function CreateWidget(title, playing, likes, favorites, visits, members) {
     let Widget = new ListWidget()
 
     let TitleText = Widget.addText(title)
@@ -117,7 +117,7 @@ function CreateWidget(title, playing, likes, favorites, visits) {
 
     Widget.addSpacer(5)
 
-    let GroupText = Widget.addText(visits)
+    let GroupText = Widget.addText(members)
 
     GroupText.textColor = Color.blue()
     GroupText.textOpacity = 0.9
