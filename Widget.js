@@ -1,27 +1,16 @@
 const URL = "https://www.rprxy.xyz/places/api-get-details?assetId=5940836435"
 const GroupAPIURL = "https://groups.roblox.com/v1/groups/8267330"
 const Req = new Request(URL)
+const Req2 = new Request(GroupAPIURL)
 const LoadJSONURL = await Req.loadJSON()
-var request = require("request")
+const LoadGroupJSONURL = await Req2.loadJSON()
 
 let AbbreviatedOnlineCount = AbbreviateNumber(LoadJSONURL.OnlineCount)
 let AbbreviatedTotalUpVoteCount = AbbreviateNumber(LoadJSONURL.TotalUpVotes)
 let AbbreviatedTotalFavorites = AbbreviateNumber(LoadJSONURL.FavoritedCount)
 let AbbrevatedTotalVisits = AbbreviateNumber(LoadJSONURL.VisitedCount)
-let GroupMembersTotal = AbbreviateNumber(FetchDataFromGroup("memberCount"))
+let GroupMembersTotal = AbbreviateNumber(LoadGroupJSONURL.memberCount)
 let GamesName = LoadJSONURL.Name
-
-function FetchDataFromGroup(Field) {
-    return new Promise((Resolve, Reject) => {
-        request({uri: GroupAPIURL},
-            function(errormessage, response, body) {
-                if (response.statusCode == 200) Resolve(JSON.parse(body)[Field])
-            else
-                Reject(`Something Went Wrong! Error: ${errormessage}`)
-            }
-        )
-    })
-}
 
 function AbbreviateNumber(Value) {
     let NewValue = Value;
