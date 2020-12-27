@@ -1,12 +1,27 @@
 const URL = "https://www.rprxy.xyz/places/api-get-details?assetId=5940836435"
+const GroupAPIURL = "https://groups.roblox.com/v1/groups/8267330"
 const Req = new Request(URL)
 const LoadJSONURL = await Req.loadJSON()
+var request = require("request")
 
 let AbbreviatedOnlineCount = AbbreviateNumber(LoadJSONURL.OnlineCount)
 let AbbreviatedTotalUpVoteCount = AbbreviateNumber(LoadJSONURL.TotalUpVotes)
 let AbbreviatedTotalFavorites = AbbreviateNumber(LoadJSONURL.FavoritedCount)
 let AbbrevatedTotalVisits = AbbreviateNumber(LoadJSONURL.VisitedCount)
+let GroupMembersTotal = AbbreviateNumber(FetchDataFromGroup("memberCount"))
 let GamesName = LoadJSONURL.Name
+
+function FetchDataFromGroup(Field) {
+    return new Promise((Resolve, Reject) => {
+        request({uri: GroupAPIURL},
+            function(errormessage, response, body) {
+                if (response.statusCode == 200) Resolve(JSON.parse(body)[Field])
+            else
+                Reject(`Something Went Wrong! Error: ${errormessage}`)
+            }
+        )
+    })
+}
 
 function AbbreviateNumber(Value) {
     let NewValue = Value;
@@ -37,7 +52,7 @@ function AbbreviateNumber(Value) {
   }
 
 if (config.runsInWidget) {
-    let Widget = await CreateWidget(GamesName, `${AbbreviatedOnlineCount} Playing!`, `${AbbreviatedTotalUpVoteCount} Total Likes!`, `${AbbreviatedTotalFavorites} Total Favorites!`, `${AbbrevatedTotalVisits} Total Visits!`)
+    let Widget = await CreateWidget(GamesName, `${AbbreviatedOnlineCount} Playing!`, `${AbbreviatedTotalUpVoteCount} Total Likes!`, `${AbbreviatedTotalFavorites} Total Favorites!`, `${AbbrevatedTotalVisits} Total Visits!`, `${GroupMembersTotal} Group Members!`)
     
     Script.setWidget(Widget)
     Script.complete()
@@ -53,6 +68,7 @@ if (config.runsInWidget) {
     Table.addRow(CreateRow("Total Likes", AbbreviatedTotalUpVoteCount))
     Table.addRow(CreateRow("Total Favorites", AbbreviatedTotalFavorites))
     Table.addRow(CreateRow("Total Visits", AbbrevatedTotalVisits))
+    Table.addRow(CreateRow("Group Members", GroupMembersTotal))
 
     if (config.runsWithSiri)
         Speech.speak("Go fuck yourself you did this shit wrong you fucker!")
@@ -109,6 +125,14 @@ function CreateWidget(title, playing, likes, favorites, visits) {
     VisitedText.textColor = Color.blue()
     VisitedText.textOpacity = 0.9
     VisitedText = Font.systemFont(16)
+
+    Widget.addSpacer(5)
+
+    let GroupText = Widget.addText(visits)
+
+    GroupText.textColor = Color.blue()
+    GroupText.textOpacity = 0.9
+    GroupText = Font.systemFont(16)
 
     Widget.addSpacer(5)
 
