@@ -1,4 +1,4 @@
-const URL = "https://www.rprxy.xyz/places/api-get-details?assetId=5940836435"
+const URL = "https://www.rprxy.xyz/places/api-get-details?assetId=6182388205"
 const GroupAPIURL = "https://groups.roblox.com/v1/groups/8267330"
 const Req = new Request(URL)
 const Req2 = new Request(GroupAPIURL)
