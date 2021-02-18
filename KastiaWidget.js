@@ -69,7 +69,7 @@ function CreateRow(title, number) {
 function CreateWidget(title, members) {
     let Widget = new ListWidget()
 
-    let TitleText = Widget.addTitle(title)
+    let TitleText = Widget.addText(title)
 
     TitleText.textColor = new Color("#48db27")
     TitleText.textOpacity = 0.9
