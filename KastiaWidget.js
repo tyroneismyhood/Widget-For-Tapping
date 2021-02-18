@@ -6,6 +6,7 @@ const LoadMinecraftJSONURL = await Req.loadJSON()
 const LoadDiscordJSONURL = await Req2.loadJSON()
 
 let AbbreviatedMemberCount = AbbreviateNumber(LoadDiscordJSONURL.memberCount)
+let TitleName = "Test"
 
 function AbbreviateNumber(Value) {
     let NewValue = Value;
@@ -36,7 +37,7 @@ function AbbreviateNumber(Value) {
   }
 
 if (config.runsInWidget) {
-    let Widget = await CreateWidget(`${AbbreviatedMemberCount} Discord Members`)
+    let Widget = await CreateWidget(TitleName, `${AbbreviatedMemberCount} Discord Members`)
     
     Script.setWidget(Widget)
     Script.complete()
@@ -45,7 +46,7 @@ if (config.runsInWidget) {
     let Row = new UITableRow()
 
     Row.isHeader = true
-    Row.addText(GamesName)
+    Row.addText(TitleName)
     Table.addRow(Row)
 
     Table.addRow(CreateRow("Discord members", AbbreviatedMemberCount))
@@ -65,8 +66,16 @@ function CreateRow(title, number) {
     return Row
 }
 
-function CreateWidget(members) {
+function CreateWidget(title, members) {
     let Widget = new ListWidget()
+
+    let TitleText = Widget.addTitle(title)
+
+    TitleText.textColor = new Color("#48db27")
+    TitleText.textOpacity = 0.9
+    TitleText = Font.systemFont(16)
+
+    Widget.addSpacer(5)
 
     let DiscordMemberText = Widget.addText(members)
 
