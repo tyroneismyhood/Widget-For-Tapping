@@ -79,7 +79,7 @@ function CreateWidget(title, members) {
 
     let DiscordMemberText = Widget.addText(members)
 
-    DiscordMemberText.textColor = new Color("#48db27")
+    DiscordMemberText.textColor = Color.blue()
     DiscordMemberText.textOpacity = 0.9
     DiscordMemberText = Font.systemFont(16)
 
