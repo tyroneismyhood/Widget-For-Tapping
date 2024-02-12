@@ -1,4 +1,4 @@
-const URL = "https://www.rprxy.xyz/places/api-get-details?assetId=5535087806"
+const URL = "https://p217-alpha.vercel.app/api/placedetails?placeId=15442338172"
 const Req = new Request(URL)
 const LoadJSONURL = await Req.loadJSON()
 
